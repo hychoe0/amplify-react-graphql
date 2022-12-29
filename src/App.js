@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
-import { API } from "aws-amplify";
-import {
-  Button,
-  Flex,
-  Heading,
-  Text,
-  TextField,
-  View,
-  withAuthenticator,
-} from "@aws-amplify/ui-react";
 import { listTodos } from "./graphql/queries";
 import {
   createTodo as createNoteMutation,
@@ -36,8 +26,8 @@ const App = ({ signOut }) => {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await API.graphql({ query: listNotes });
-    const notesFromAPI = apiData.data.listNotes.items;
+    const apiData = await API.graphql({ query: listTodos });
+    const notesFromAPI = apiData.data.listTodos.items;
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
